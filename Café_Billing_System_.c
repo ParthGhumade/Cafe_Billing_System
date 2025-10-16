@@ -259,7 +259,7 @@ int main()
         
         printf("You Chose %s\n",bill[j].name);
         j++;
-        printf("Enter Y To Select More Dishes :");
+        printf("Enter Y To Select More Dishes And N To Checkout :");
         scanf("%s", &c);
         clear(8);
 
@@ -280,4 +280,5 @@ int main()
     PrintBill();
    
    return 0;
+
 }
