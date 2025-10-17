@@ -113,7 +113,7 @@ menu dessert[20]={
 menu bill[20]={};
 
 menu serial[5]={{"A"},{"B"},{"C"},{"D"},{"E"},};
-
+      
 void clean(){
     #if _WIN32 || _WIN64
         system("cls");
@@ -145,6 +145,7 @@ void PrintBill()
     printf("----------------------------------------------------------------------------------------\n");
     printf("%55s \t       Rs.%6.1f\n", "Grand Total", total);
     printf("----------------------------------------------------------------------------------------\n");
+    printf("%88s\n",p);
     
     printf("\n\n\n\n\n\n");
 }
@@ -176,7 +177,7 @@ int main()
 {   clean();
 
     char choice[5];
-    int sandno=10,itano=20,burno=15,bevno=10,desno=20,i;
+    int sandno=10,itano=20,burno=15,bevno=10,desno=20,i,f=0,f2=0;
 
     printf("\t\t\t\t\t\t\t\t\t\t\tCubes n' Dices Cafe\n\n\n");
     
@@ -214,13 +215,29 @@ int main()
 
    while  (strcmp(c,"y")==0||strcmp(c,"Y")==0)                        
                           
-   {    printf("\nEnter your choice like A3 B4 etc\n");
+   {    f2=0;
+        printf("\nEnter your choice like A3 B4 etc\n");
         printf("\nEnter your choice  : ");
         scanf("%s",choice);
-        printf("\nEnter the quantity : ");
-        scanf("%d", &quantity);
 
-        n++;
+        while (f2==0)
+        {   printf("\nEnter the quantity : ");
+            scanf(" %d", &quantity);
+
+            if (quantity<=0)
+            {   printf("\n\nInvalid Choice");
+                getchar();
+                getchar();
+                clear(5);
+                
+            }
+            else
+            {
+                
+                n++;
+                f2=1;
+            }
+        }
 
         i=atoi(&choice[1]);
 
@@ -257,28 +274,36 @@ int main()
 
         };
         
-        printf("You Chose %s\n",bill[j].name);
+        printf("\nYou Chose %s\t\n\n",bill[j].name);
         j++;
         printf("Enter Y To Select More Dishes And N To Checkout :");
-        scanf("%s", &c);
-        clear(8);
+        scanf("%s", c);
+        clear(10);
 
    }
 
-    printf("Enter P For Parcel And D For Dine-In :");
-    scanf("%s", &p);
+   while (f==0)
+   {
+     printf("Enter P For Parcel And D For Dine-In :");
+     scanf(" %s", p);
 
-    if(strcmp(p,"p")==0||strcmp(p,"P")==0)      {strcpy(p,"Parcel");}
+     if(strcmp(p,"p")==0||strcmp(p,"P")==0)      {strcpy(p,"Parcel"); f=1;}
 
-    else if(strcmp(p,"d")==0||strcmp(p,"D")==0) {strcpy(p,"Parcel");}
+     else if(strcmp(p,"d")==0||strcmp(p,"D")==0) {strcpy(p,"Dine-In"); f=1;}
 
-    else                                        {printf("Invalid Choice");}
+     else
+     {
+        printf("\nInvalid Choice");
+        getchar();
+        clear(2);
+        
 
+     }
+    }
     getchar();
     clean();
     calc();
     PrintBill();
    
    return 0;
-
 }
